@@ -1,3 +1,6 @@
+Based on the gathered information, here is the detailed all-in-one README.md for AutoDock:
+
+```markdown
 # 🚀 **AutoDock: Automated Docker Update & Cleanup**
 
 AutoDock automates **Docker container updates** and **removes unused containers** to keep your system clean and optimized.
@@ -63,13 +66,22 @@ chmod +x setup.sh autodock.sh send_alerts.sh
 ./autodock.sh
 ```
 
-#### Schedule with Cron (Daily at 2 AM)
+### **📅 Automating with Cron Jobs**
+AutoDock schedules two cron jobs:
+
+| Time | Task |
+|------|------|
+| 3 AM | Pulls the latest Docker images & restarts outdated containers |
+| 4 AM | Cleans up unused Docker resources |
+
+To manually add/edit cron jobs, run:
 ```bash
 crontab -e
 ```
-Add this line:
+Then add:
 ```bash
-0 2 * * * /path/to/autodock.sh >> /path/to/logs/autodock.log 2>&1
+0 3 * * * /path/to/autodock/update_containers.sh >> /path/to/autodock/logs/update.log 2>&1
+0 4 * * * /path/to/autodock/cleanup.sh >> /path/to/autodock/logs/cleanup.log 2>&1
 ```
 
 ### 📧 **Testing Alerts**
@@ -77,15 +89,40 @@ Add this line:
 ./send_alerts.sh "Test Alert" "AutoDock Notification Test"
 ```
 
-### 📜 **Future Enhancements**
-- Add Discord & WhatsApp alerts
-- Store update history in a database
-- Implement a user-friendly web dashboard
 
-### 📃 **License**
-MIT License © 2025 Your Name
 
-🚀 Keep your Docker environment clean & up-to-date with AutoDock!
+### 📝 **Logs & Reports**
+AutoDock stores logs in the logs/ directory:
+```bash
+logs/
+ ├── update_2025-02-28.log
+ ├── cleanup_2025-02-28.log
+```
+You can view logs with:
+```bash
+cat logs/update_$(date +%Y-%m-%d).log
+```
+
+### 🔧 **Troubleshooting**
+**Docker command not found?**
+Ensure Docker is installed:
+```bash
+docker --version
+```
+If not installed, install Docker:
+```bash
+sudo apt update && sudo apt install docker.io -y
+```
+
+**Email not sending?**
+Ensure mailutils is installed:
+```bash
+sudo apt install mailutils -y
+```
+Test sending an email:
+```bash
+echo "Test Email" | mail -s "Test Subject" your-email@example.com
+```
 
 ---
 
@@ -164,3 +201,14 @@ echo "✅ Setup Complete!"
 config.env
 logs/*
 backup/*
+```
+```
+### 📜 **Future Enhancements**
+- Add Discord & WhatsApp alerts
+- Store update history in a database
+- Implement a user-friendly web dashboard
+
+### 📃 **License**
+MIT License © 2025 Kiran Kumar
+
+🚀 Keep your Docker environment clean & up-to-date with AutoDock!
