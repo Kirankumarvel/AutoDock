@@ -1,6 +1,4 @@
-Based on the gathered information, here is the detailed all-in-one README.md for AutoDock:
 
-```markdown
 # 🚀 **AutoDock: Automated Docker Update & Cleanup**
 
 AutoDock automates **Docker container updates** and **removes unused containers** to keep your system clean and optimized.
